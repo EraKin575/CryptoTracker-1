@@ -6,11 +6,19 @@ const ListData = () => {
 
     const [list, setList] = useState([]);
     useEffect(() => {
-        axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-            .then(res => {
-                setList(res.data)
-            })
-            .catch(error => console.log(error))
+        const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'a67bb7208amshc9f3583b2bf2877p159913jsn086a6691f0d5', //put your key from RAPID API
+		'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+	}
+};
+
+fetch('https://coinranking1.p.rapidapi.com/coins?', options)
+	.then(response => response.json())
+	.then(response => setList((response)) //WATCH THE API RESPONSE ON https://rapidapi.com/Coinranking/api/coinranking1/ AND CHANGE ACCORDING TO OBJECT
+	.catch(err => console.error(err));
+      
     })
     return (
         <>
